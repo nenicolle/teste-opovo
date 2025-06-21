@@ -123,10 +123,10 @@ async function getMovieCredits() {
     card.style.minWidth = "190px";
     img.style.width = "190px";
     img.style.height = "190px";
-    img.style.objectFit = "cover"; // mantém proporção e preenche a área
-    img.style.borderRadius = "50%"; // deixa redondo
+    img.style.objectFit = "cover";
+    img.style.borderRadius = "50%";
     img.style.display = "block";
-    img.style.margin = "0 auto"; // centraliza horizontalmente
+    img.style.margin = "0 auto";
 
     const nome = document.createElement("p");
     nome.textContent = ator.name;
