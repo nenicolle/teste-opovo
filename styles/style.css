@@ -1,0 +1,23 @@
+/* @import url("https://fonts.googleapis.com/css2?family=League+Spartan:wght@100..900&display=swap");
+:root {
+  --playcube-logo-clara: url("../assets/logo-clara.png");
+  --playcube-logo-escura: url("../assets/logo-escura.png");
+  --red: #ff0000;
+  --dark-blue: #102c57;
+  --light-bege: #f8f0e5;
+  --medium-bege: #eadbc8;
+  --dark-bege: #dac0a3;
+  --font-color: #333333;
+  --font-bold: 700;
+  --font-regular: 400;
+  --regular-font-size: 16px;
+}
+body {
+  color: var(--font-color);
+}
+.menuNav {
+  background-color: var(--dark-blue);
+  color: #f8f0e5;
+  height: 100px;
+  width: 100%;
+} */
