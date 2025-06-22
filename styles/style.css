@@ -1,4 +1,4 @@
-/* @import url("https://fonts.googleapis.com/css2?family=League+Spartan:wght@100..900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=League+Spartan:wght@100..900&display=swap");
 :root {
   --playcube-logo-clara: url("../assets/logo-clara.png");
   --playcube-logo-escura: url("../assets/logo-escura.png");
@@ -10,9 +10,10 @@
   --font-color: #333333;
   --font-bold: 700;
   --font-regular: 400;
-  --regular-font-size: 16px;
+  --regular-font-size: 24px;
 }
 body {
+  padding-top: 100px;
   color: var(--font-color);
 }
 .menuNav {
@@ -20,4 +21,131 @@ body {
   color: #f8f0e5;
   height: 100px;
   width: 100%;
-} */
+}
+.lightBackground {
+  background-color: var(--light-bege);
+}
+.castSection {
+  position: relative;
+  background-color: var(--medium-bege);
+}
+.posterImage {
+  width: 400px;
+  height: 600px;
+}
+.titleText {
+  font-weight: var(--font-bold);
+}
+#carouselElenco {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+#carouselElenco::-webkit-scrollbar {
+  display: none;
+}
+.lateral-esquerda,
+.lateral-direita {
+  position: absolute;
+  top: 35%;
+  transform: translateY(-50%);
+  width: 50px;
+  height: auto;
+  z-index: 99;
+  pointer-events: none;
+}
+
+.lateral-esquerda {
+  left: 0;
+}
+
+.lateral-direita {
+  right: 0;
+}
+.carrosselLine {
+  margin-top: 40px;
+}
+.seeMoreButton {
+  background-color: var(--dark-blue);
+  color: var(--light-bege);
+  width: 100px;
+  height: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 20px;
+}
+.highlightFont {
+  color: var(--dark-blue);
+  font-weight: 700;
+}
+.cardContainer {
+  width: 300px;
+  min-width: 300px;
+  height: 300px;
+  background: var(--medium-bege);
+  border-radius: 10px;
+  opacity: 1;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.reviewText {
+  flex: 1;
+  height: 120px;
+  max-width: 300px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  white-space: normal;
+  font-size: 14px;
+}
+.reviewFooter {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.horizontal-scroll {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  scroll-snap-type: x mandatory;
+  -ms-overflow-style: none;
+  scroll-behavior: smooth;
+}
+.horizontal-scroll::-webkit-scrollbar {
+  display: none;
+}
+.video-thumb {
+  flex: 0 0 auto;
+  width: 400px;
+  height: 225px;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.video-thumb iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+  border-radius: 10px;
+}
+#videoScroller {
+  display: flex;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  gap: 1rem;
+  white-space: nowrap;
+  -webkit-overflow-scrolling: touch; /* para smooth scroll no iOS */
+}
+
+#videoScroller iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+  border-radius: 8px;
+}
