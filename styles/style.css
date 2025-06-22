@@ -84,8 +84,10 @@ body {
   background-color: var(--dark-blue);
   font-weight: var(--font-bold);
   color: var(--light-bege);
-  height: 500px;
+  height: 450px;
+  align-content: center !important;
 }
+
 .cardContainer {
   width: 300px;
   min-width: 300px;
@@ -101,16 +103,17 @@ body {
 }
 
 .reviewText {
-  flex: 1;
-  height: 120px;
-  max-width: 300px;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  flex: 1 1 auto;
+  min-width: 0;
+  max-width: 100%;
   display: -webkit-box;
   -webkit-box-orient: vertical;
+  -webkit-line-clamp: 8;
+  overflow: hidden;
+  text-overflow: ellipsis;
   white-space: normal;
-  font-size: 14px;
 }
+
 .reviewFooter {
   display: flex;
   flex-direction: column;
@@ -127,50 +130,233 @@ body {
 .horizontal-scroll::-webkit-scrollbar {
   display: none;
 }
-.video-thumb {
-  flex: 0 0 auto;
-  width: 400px;
-  height: 225px;
-  border-radius: 10px;
-  overflow: hidden;
-}
 
-.video-thumb iframe {
-  width: 100%;
-  height: 100%;
-  border: none;
-  border-radius: 10px;
-}
 #videoScroller {
   display: flex;
   overflow-x: auto;
   scroll-snap-type: x mandatory;
   gap: 1rem;
   white-space: nowrap;
-  -webkit-overflow-scrolling: touch; /* para smooth scroll no iOS */
+  -webkit-overflow-scrolling: touch;
 }
-
 #videoScroller iframe {
   width: 100%;
   height: 100%;
   border: none;
   border-radius: 8px;
 }
-.footer {
-  background-color: var(--light-bege); /* Cor de fundo clara da imagem */
-  padding: 20px 0;
-  color: var(--dark-blue); /* Cor aproximada do texto */
-  height: 230px;
+
+.videoScroller {
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  gap: 1rem;
+  white-space: nowrap;
 }
+.videoContainer {
+  display: flex;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  gap: 1rem;
+  white-space: nowrap;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: thin;
+}
+
+.videoContainer::-webkit-scrollbar {
+  height: 8px;
+}
+
+.videoContainer::-webkit-scrollbar-thumb {
+  background-color: #ccc;
+  border-radius: 4px;
+}
+.video-thumb {
+  scroll-snap-align: start;
+  flex: 0 0 auto;
+  min-width: 300px;
+  height: 170px;
+  margin-right: 1rem;
+}
+
+.video-thumb iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+  border-radius: 8px;
+}
+.videoCard {
+  min-width: 300px;
+  height: 150px;
+  scroll-snap-align: start;
+  display: inline-block;
+}
+.countText {
+  color: #dac0a3 !important;
+}
+.horizontal-scroll {
+  display: flex;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scroll-snap-type: x mandatory;
+  gap: 1rem;
+  padding-bottom: 1rem;
+  white-space: nowrap;
+  -webkit-overflow-scrolling: touch;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.horizontal-scroll::-webkit-scrollbar {
+  display: none;
+}
+.horizontal-scroll::-webkit-scrollbar-thumb {
+  background-color: #ccc;
+  border-radius: 4px;
+}
+#carouselElenco,
+#reviewsContainer,
+#videoContainer,
+#posterContainer,
+#backdropContainer {
+  overflow-x: auto;
+  overflow-y: hidden;
+  scroll-snap-type: x mandatory;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+#carouselElenco::-webkit-scrollbar,
+#reviewsContainer::-webkit-scrollbar,
+#videoContainer::-webkit-scrollbar,
+#posterContainer::-webkit-scrollbar,
+#backdropContainer::-webkit-scrollbar {
+  display: none;
+}
+
+.horizontal-scroll > * {
+  scroll-snap-align: start;
+  flex: 0 0 auto;
+}
+
+.video-thumb {
+  min-width: 300px;
+  height: 170px;
+  margin-right: 1rem;
+}
+
+.video-thumb iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+  border-radius: 8px;
+}
+
+.poster,
+.backdrop {
+  min-width: 200px;
+  height: 300px;
+  margin-right: 1rem;
+}
+
+.poster img,
+.backdrop img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.cardContainer {
+  min-width: 300px;
+  height: 300px;
+  margin-right: 1rem;
+}
+
+.recomendationSection {
+  padding: 20px;
+}
+.container-sm {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+.movieRecomendationList {
+  display: flex;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  gap: 20px;
+  padding-bottom: 10px;
+  scrollbar-width: none;
+}
+.movieRecomendationList::-webkit-scrollbar {
+  display: none;
+}
+.movieRecomendationList::-webkit-scrollbar-thumb {
+  background-color: #888;
+  border-radius: 4px;
+}
+.movieRecomendationList::-webkit-scrollbar-thumb:hover {
+  background-color: #555;
+}
+.movie-card {
+  flex: 0 0 auto;
+  text-align: center;
+  width: 150px;
+  height: 330px;
+}
+.movie-card p {
+  font-size: 1.1rem;
+  margin: none !important;
+  line-height: 1.2;
+}
+.movie-card img {
+  border-radius: 8px;
+  width: 150px;
+  height: auto;
+}
+.recomendationTitle {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.footer {
+  background-color: var(--light-bege);
+  padding: 20px 0;
+  color: var(--dark-blue);
+  height: 230px;
+  display: flex;
+  justify-content: center;
+}
+
+.footer-content {
+  display: flex;
+  align-items: flex-start;
+  width: 100%;
+  max-width: 1200px;
+  padding: 0 20px;
+}
+
 .footer-logo {
   height: 60px;
+  margin-right: 40px;
 }
+
+.footer-columns {
+  display: flex;
+  flex: 1;
+  justify-content: space-between;
+}
+
+.footer-links {
+  flex: 1;
+  margin: 0 20px;
+}
+
 .footer-links a {
   color: var(--dark-blue);
   text-decoration: none;
   display: block;
-  margin-bottom: 5px;
+  margin-bottom: 10px;
 }
+
 .footer-links a:hover {
   text-decoration: underline;
 }

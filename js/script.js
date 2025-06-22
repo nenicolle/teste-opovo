@@ -1,23 +1,16 @@
 const BASE_URL = "https://api.themoviedb.org/3";
+const USE_API_TOKEN =
+  "eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI0NDhlNDkyNDBmODllYjQ1MjMzODY1MDFlYjMzOWI0ZiIsIm5iZiI6MTc1MDQyNjUzNC41Mzc5OTk5LCJzdWIiOiI2ODU1NjNhNjJmMDI1ZTU1NzgwY2Y4MTIiLCJzY29wZXMiOlsiYXBpX3JlYWQiXSwidmVyc2lvbiI6MX0.66hdtCH3nPlZaYm1HBg8UxunF5F7OiGcoO0nJuGi9F4";
 
 const getConfig = {
   method: "GET",
   headers: {
     accept: "application/json",
-    Authorization: `Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI0NDhlNDkyNDBmODllYjQ1MjMzODY1MDFlYjMzOWI0ZiIsIm5iZiI6MTc1MDQyNjUzNC41Mzc5OTk5LCJzdWIiOiI2ODU1NjNhNjJmMDI1ZTU1NzgwY2Y4MTIiLCJzY29wZXMiOlsiYXBpX3JlYWQiXSwidmVyc2lvbiI6MX0.66hdtCH3nPlZaYm1HBg8UxunF5F7OiGcoO0nJuGi9F4`,
+    Authorization: `Bearer ${USE_API_TOKEN}`,
   },
 };
 
-const movie_id = 552524;
-
-async function getTopRated(movie_id) {
-  const res = await fetch(
-    `${BASE_URL}/movie/${movie_id}/recommendations?language=pt-BR`,
-    getConfig
-  );
-  const data = await res.json();
-  console.log(data, "data");
-}
+let movie_id = 552524;
 
 async function getMovieInformation(movie_id) {
   const res = await fetch(
@@ -60,7 +53,9 @@ async function getMovieInformation(movie_id) {
 
   const genresText = data.genres.map((p) => p.name).join(", ");
   document.getElementById("genre").textContent = genresText;
-  document.getElementById("sinopse").textContent = data.overview;
+  document.getElementById("sinopse").textContent = data.overview
+    ? data.overview
+    : "-";
 
   const formatarDinheiro = (valor) =>
     valor.toLocaleString("pt-BR", {
@@ -203,20 +198,14 @@ async function getReviews(movie_id) {
   });
 }
 
-async function getMovieAssets(movie_id) {
+async function getVideoAssets(movie_id) {
   const videoResponse = await fetch(
     `${BASE_URL}/movie/${movie_id}/videos?language=pt-BR`,
     getConfig
   );
-  const imageResponse = await fetch(
-    `${BASE_URL}/movie/${movie_id}/images`,
-    getConfig
-  );
-
   const videoData = await videoResponse.json();
-  const imageData = await imageResponse.json();
 
-  const videoContainer = document.getElementById("videoScroller");
+  const videoContainer = document.getElementById("videoContainer");
   const videoCount = document.getElementById("videoCount");
 
   if (!videoContainer || !videoCount) {
@@ -226,6 +215,7 @@ async function getMovieAssets(movie_id) {
 
   const youtubeVideos = videoData.results.filter((v) => v.site === "YouTube");
   videoCount.textContent = `(${youtubeVideos.length})`;
+
   videoContainer.innerHTML = "";
 
   if (youtubeVideos.length === 0) {
@@ -238,6 +228,7 @@ async function getMovieAssets(movie_id) {
   videoContainer.style.scrollSnapType = "x mandatory";
   videoContainer.style.gap = "1rem";
   videoContainer.style.whiteSpace = "nowrap";
+  videoContainer.style.height = "fit-content";
   videoContainer.style.webkitOverflowScrolling = "touch";
 
   youtubeVideos.forEach((video) => {
@@ -272,8 +263,196 @@ async function getMovieAssets(movie_id) {
   );
 }
 
-getTopRated(movie_id);
-getMovieInformation(movie_id);
-getMovieCredits(movie_id);
-getReviews(movie_id);
-getMovieAssets(movie_id);
+async function getImagesAssets(movie_id) {
+  try {
+    const imageResponse = await fetch(
+      `${BASE_URL}/movie/${movie_id}/images`,
+      getConfig
+    );
+    if (!imageResponse.ok) {
+      throw new Error(
+        `Erro na requisição: ${imageResponse.status} ${imageResponse.statusText}`
+      );
+    }
+    const imageData = await imageResponse.json();
+    console.log(imageData, "imageData");
+    displayImages(imageData);
+    ativarScrollHorizontalComRoda();
+  } catch (error) {
+    console.error("Erro ao buscar imagens:", error);
+    document.getElementById("posterContainer").innerHTML =
+      "<p class='p-2'>Erro ao carregar pôsteres: " + error.message + "</p>";
+    document.getElementById("backdropContainer").innerHTML =
+      "<p class='p-2'>Erro ao carregar imagens de fundo: " +
+      error.message +
+      "</p>";
+  }
+}
+
+function displayImages(imageData) {
+  const posterContainer = document.getElementById("posterContainer");
+  const backdropContainer = document.getElementById("backdropContainer");
+  const posterCount = document.getElementById("posterCount");
+  const backdropCount = document.getElementById("backdropCount");
+
+  posterCount.textContent = `(${imageData.posters.length})`;
+  backdropCount.textContent = `(${imageData.backdrops.length})`;
+
+  posterContainer.innerHTML = "";
+  backdropContainer.innerHTML = "";
+
+  function createImageElement(path, altText) {
+    const img = document.createElement("img");
+    img.src = `https://image.tmdb.org/t/p/w500${path}`;
+    img.alt = altText;
+    img.className = "img-fluid rounded shadow-sm";
+    img.style.maxHeight = "300px";
+    img.style.marginRight = "1rem";
+    img.style.scrollSnapAlign = "start";
+    return img;
+  }
+
+  imageData.posters.forEach((poster) => {
+    if (poster.file_path) {
+      const img = createImageElement(poster.file_path, "Pôster do filme");
+      posterContainer.appendChild(img);
+    }
+  });
+
+  imageData.backdrops.forEach((backdrop) => {
+    if (backdrop.file_path) {
+      const img = createImageElement(
+        backdrop.file_path,
+        "Imagem de fundo do filme"
+      );
+      backdropContainer.appendChild(img);
+    }
+  });
+}
+function ativarScrollHorizontalComRoda() {
+  const carrosseis = document.querySelectorAll(".horizontal-scroll");
+  carrosseis.forEach((carrossel) => {
+    carrossel.addEventListener(
+      "wheel",
+      (e) => {
+        if (e.deltaY === 0) return;
+        e.preventDefault();
+        carrossel.scrollLeft += e.deltaY;
+      },
+      { passive: false }
+    );
+  });
+}
+async function getTopRated(movie_id) {
+  try {
+    const res = await fetch(
+      `${BASE_URL}/movie/${movie_id}/recommendations?language=pt-BR`,
+      getConfig
+    );
+    const data = await res.json();
+    console.log(data, "data");
+
+    const movieList = document.getElementById("movie-list");
+
+    if (data.results && data.results.length > 0) {
+      movieList.innerHTML = "";
+
+      data.results.map((movie) => {
+        const posterPath = movie.poster_path
+          ? `https://image.tmdb.org/t/p/w500${movie.poster_path}`
+          : "https://placehold.co/185x278?text=Sem+foto&font=roboto";
+        const title = movie.title || "Título não disponível";
+        const rating = movie.vote_average
+          ? `${(movie.vote_average * 10).toFixed(1)}%`
+          : "Sem avaliação";
+
+        const movieCard = document.createElement("div");
+        movieCard.className = "movie-card";
+        movieCard.setAttribute("data-id", movie.id);
+        movieCard.innerHTML = `
+              <div>
+                <img src="${posterPath}" alt="Pôster de ${title}" />
+                <div class="posterRecomendationText">
+                <p class='recomendationTitle'>${title}</p>
+                <p class='font-weight-normal'>${rating}</p>
+                </div>
+              </div>
+            `;
+
+        movieCard.addEventListener("click", () => {
+          movie_id = movie.id;
+          updateMovieData(movie_id);
+        });
+
+        movieList.appendChild(movieCard);
+      });
+    } else {
+      movieList.innerHTML = `
+            <div class="text-center">
+              <p>Nenhuma recomendação encontrada</p>
+            </div>
+          `;
+    }
+  } catch (error) {
+    console.error("Erro ao buscar recomendações:", error);
+    movieList.innerHTML = `
+          <div class="text-center">
+            <p>Erro ao carregar recomendações</p>
+          </div>
+        `;
+  }
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+  ativarScrollHorizontalComRoda();
+  const carrosselElenco = document.getElementById("carouselElenco");
+  if (carrosselElenco) {
+    carrosselElenco.addEventListener("scroll", atualizarFadesElenco);
+  }
+  setTimeout(atualizarFadesElenco, 200);
+});
+document.getElementById("movie-list").addEventListener("wheel", (event) => {
+  event.preventDefault();
+  const scrollAmount = event.deltaY * 5;
+  event.currentTarget.scrollLeft += scrollAmount;
+});
+document
+  .getElementById("backdropContainer")
+  .addEventListener("wheel", (event) => {
+    event.preventDefault();
+    const scrollAmount = event.deltaY * 5;
+    event.currentTarget.scrollLeft += scrollAmount;
+  });
+document
+  .getElementById("posterContainer")
+  .addEventListener("wheel", (event) => {
+    event.preventDefault();
+    const scrollAmount = event.deltaY * 5;
+    event.currentTarget.scrollLeft += scrollAmount;
+  });
+document.getElementById("videoContainer").addEventListener("wheel", (event) => {
+  event.preventDefault();
+  const scrollAmount = event.deltaY * 5;
+  event.currentTarget.scrollLeft += scrollAmount;
+});
+document
+  .getElementById("reviewsContainer")
+  .addEventListener("wheel", (event) => {
+    event.preventDefault();
+    const scrollAmount = event.deltaY * 5;
+    event.currentTarget.scrollLeft += scrollAmount;
+  });
+
+async function updateMovieData(movie_id) {
+  window.scrollTo({ top: 0, behavior: "smooth" });
+  await Promise.all([
+    getMovieInformation(movie_id),
+    getMovieCredits(movie_id),
+    getReviews(movie_id),
+    getVideoAssets(movie_id),
+    getImagesAssets(movie_id),
+    getTopRated(movie_id),
+  ]);
+}
+
+updateMovieData(movie_id);

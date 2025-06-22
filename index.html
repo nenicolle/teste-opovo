@@ -35,8 +35,8 @@
             <p class="mb-1 highlightFont">Sinopse:</p>
             <span id="sinopse"></span>
           </div>
-          <div class="d-flex justify-content-between mb-3">
-            <div>
+          <div class="d-flex justify-content-start mb-3">
+            <div class="w-50">
               <p class="mb-1 highlightFont">Dirigido por:</p>
               <span id="diretor"></span>
             </div>
@@ -45,8 +45,8 @@
               <span id="roteirista"></span>
             </div>
           </div>
-          <div class="d-flex justify-content-between mb-3">
-            <div>
+          <div class="d-flex justify-content-start mb-3">
+            <div class="w-50">
               <p class="mb-1 highlightFont">Situação:</p>
               <span id="status"></span>
             </div>
@@ -55,8 +55,8 @@
               <span id="idioma"></span>
             </div>
           </div>
-          <div class="d-flex justify-content-between mb-3">
-            <div>
+          <div class="d-flex justify-content-start mb-3">
+            <div class="w-50">
               <p class="mb-1 highlightFont">Orçamento:</p>
               <span id="orcamento" class="d-block"></span>
             </div>
@@ -70,7 +70,7 @@
     </section>
     <section id="elenco" class="castSection py-5">
       <div class="container-sm position-relative">
-        <div class="d-flex align-items-center row">
+        <div class="d-flex align-items-center">
           <h2 class="mr-3 highlightFont">Elenco</h2>
           <button type="button" class="btn seeMoreButton mr-3">Ver mais</button>
         </div>
@@ -96,13 +96,13 @@
     </section>
     <section id="reviews" class="lightBackground py-5">
       <div class="container-sm">
-        <div class="d-flex align-items-center row">
+        <div class="d-flex align-items-center">
           <h2 class="mr-3 highlightFont">Resenhas</h2>
           <button type="button" class="btn seeMoreButton mr-3">Ver mais</button>
         </div>
         <div
           id="reviewsContainer"
-          class="d-flex w-100 horizontal-scroll"
+          class="d-flex w-100"
           style="
             overflow-x: auto;
             scroll-snap-type: x mandatory;
@@ -110,101 +110,73 @@
             white-space: nowrap;
           "
         >
-          <div
-            class="cardContainer mx-3"
-            style="
-              min-width: 300px;
-              scroll-snap-align: start;
-              display: inline-block;
-            "
-            id="reviewTemplate"
-            hidden
-          ></div>
+          <div class="cardContainer mx-3 d-flex" hidden></div>
         </div>
       </div>
     </section>
     <section id="media" class="lightBackground py-5">
       <div class="container-sm">
-        <div>
-          <div class="d-flex align-items-center row">
-            <h2 class="mr-3 highlightFont">Mídia</h2>
-          </div>
-          <div class="container-sm">
-            <div class="d-flex align-items-center row">
-              <h3 class="mr-3">
-                Vídeos <span id="videoCount" class="text-muted">(0)</span>
-              </h3>
-              <button class="btn seeMoreButton">Ver mais</button>
-            </div>
-            <div
-              id="videoScroller"
-              class="d-flex w-100 horizontal-scroll"
-              style="
-                overflow-x: auto;
-                scroll-snap-type: x mandatory;
-                gap: 1rem;
-                white-space: nowrap;
-              "
-            >
-              <div
-                class="videoCard mx-3"
-                style="
-                  min-width: 300px;
-                  scroll-snap-align: start;
-                  display: inline-block;
-                "
-                id="videoTemplate"
-                hidden
-              ></div>
-            </div>
-          </div>
-          <div
-            id="videoScroller"
-            class="d-flex horizontal-scroll w-100 mt-3"
-            style="scroll-snap-type: x mandatory; gap: 1rem"
-          ></div>
-          <h3 class="mt-4">Pôsteres</h3>
-          <div id="postersContainer" class="media-scroll"></div>
-
-          <h3 class="mt-4">Imagens de fundo</h3>
-          <div id="backdropsContainer" class="media-scroll"></div>
+        <div class="d-flex align-items-center">
+          <h2 class="mr-3 highlightFont">Mídia</h2>
         </div>
+
+        <div class="d-flex align-items-center mt-4">
+          <h3 class="mr-3">
+            Vídeos <span id="videoCount" class="countText">(0)</span>
+          </h3>
+          <button class="btn seeMoreButton">Ver mais</button>
+        </div>
+        <div id="videoContainer" class="d-flex w-100 videoContainer"></div>
+
+        <div class="d-flex align-items-center mt-4">
+          <h3 class="mr-3">
+            Pôsteres <span id="posterCount" class="countText">(0)</span>
+          </h3>
+          <button class="btn seeMoreButton">Ver mais</button>
+        </div>
+        <div id="posterContainer" class="d-flex w-100"></div>
+
+        <div class="d-flex align-items-center mt-4">
+          <h3 class="mr-3">
+            Imagens de Fundo
+            <span id="backdropCount" class="countText">(0)</span>
+          </h3>
+          <button class="btn seeMoreButton">Ver mais</button>
+        </div>
+        <div id="backdropContainer" class="d-flex w-100"></div>
       </div>
     </section>
 
-    <section id="recomendation" class="recomendationSection">
-      <div class="container-sm">
-        <div class="mb-4 text-center">
-          <img src="" alt="Pôster de [Título]" style="width: 150px" />
-          <h3>[Título]</h3>
-          <h4>Aprovação: 8.5 / 10</h4>
-        </div>
+    <section id="recomendation" class="recomendationSection py-5">
+      <div class="container-sm d-flex flex-column justify-content-center">
+        <h3 class="mr-3">Recomendações</h3>
+        <div class="movieRecomendationList w-100" id="movie-list"></div>
       </div>
     </section>
     <footer id="footer" class="footer">
-      <div
-        class="container-sm d-flex justify-content-evenly flex-column flex-md-row"
-      >
+      <div class="container-sm d-flex justify-content-evenly w-100">
         <img
           alt="PlayCube logo"
           class="footer-logo"
           src=""
           style="content: var(--playcube-logo-escura)"
         />
-        <div class="footer-links">
-          <a href="#">Sobre</a>
-          <a href="#">Contato</a>
-          <a href="#">Suporte</a>
-        </div>
-        <div class="footer-links">
-          <a href="#">Adicione um Filme</a>
-          <a href="#">Adicione uma Série</a>
-          <a href="#">Discussões</a>
-        </div>
-        <div class="footer-links">
-          <a href="#">Termos de Uso</a>
-          <a href="#">Política de Privacidade</a>
-          <a href="#">Diretrizes</a>
+        <div class="footer-columns">
+          <div class="footer-links">
+            <a href="#">Sobre</a>
+            <a href="#">Contato</a>
+            <a href="#">Suporte</a>
+          </div>
+          <div class="footer-links">
+            <a href="#">Adicione um Filme</a>
+            <a href="#">Adicione uma Série</a>
+            <a href="#">Discussões</a>
+          </div>
+          <div class="footer-links">
+            <a href="#">Termos de Uso</a>
+            <a href="#">Política de Privacidade</a>
+            <a href="#">Diretrizes</a>
+          </div>
         </div>
       </div>
     </footer>
