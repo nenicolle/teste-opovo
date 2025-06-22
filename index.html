@@ -26,42 +26,42 @@
       <div class="container-sm w-100 d-flex">
         <img src="" alt="" class="posterImage" />
         <div class="ml-4 w-100 d-flex flex-column">
-          <h1 class="fs-1 mb-0"></h1>
+          <h1 class="fs-1 mb-0 highlightFont"></h1>
           <div class="mb-3">
-            <p class="mb-1 font-weight-bold">Gênero:</p>
+            <p class="mb-1 highlightFont">Gênero:</p>
             <span id="genre"></span>
           </div>
           <div class="mb-3">
-            <p class="mb-1 font-weight-bold">Sinopse:</p>
+            <p class="mb-1 highlightFont">Sinopse:</p>
             <span id="sinopse"></span>
           </div>
           <div class="d-flex justify-content-between mb-3">
             <div>
-              <p class="mb-1 font-weight-bold">Dirigido por:</p>
+              <p class="mb-1 highlightFont">Dirigido por:</p>
               <span id="diretor"></span>
             </div>
             <div>
-              <p class="mb-1 font-weight-bold">Escrito por:</p>
+              <p class="mb-1 highlightFont">Escrito por:</p>
               <span id="roteirista"></span>
             </div>
           </div>
           <div class="d-flex justify-content-between mb-3">
             <div>
-              <p class="mb-1 font-weight-bold">Situação:</p>
+              <p class="mb-1 highlightFont">Situação:</p>
               <span id="status"></span>
             </div>
             <div>
-              <p class="mb-1 font-weight-bold">Idioma original:</p>
+              <p class="mb-1 highlightFont">Idioma original:</p>
               <span id="idioma"></span>
             </div>
           </div>
           <div class="d-flex justify-content-between mb-3">
             <div>
-              <p class="mb-1 font-weight-bold">Orçamento:</p>
+              <p class="mb-1 highlightFont">Orçamento:</p>
               <span id="orcamento" class="d-block"></span>
             </div>
             <div>
-              <p class="mb-1 font-weight-bold">Receita:</p>
+              <p class="mb-1 highlightFont">Receita:</p>
               <span id="receita" class="d-block"></span>
             </div>
           </div>
@@ -71,7 +71,7 @@
     <section id="elenco" class="castSection py-5">
       <div class="container-sm position-relative">
         <div class="d-flex align-items-center row">
-          <h2 class="mr-3">Elenco</h2>
+          <h2 class="mr-3 highlightFont">Elenco</h2>
           <button type="button" class="btn seeMoreButton mr-3">Ver mais</button>
         </div>
 
@@ -97,7 +97,7 @@
     <section id="reviews" class="lightBackground py-5">
       <div class="container-sm">
         <div class="d-flex align-items-center row">
-          <h2 class="mr-3">Resenhas</h2>
+          <h2 class="mr-3 highlightFont">Resenhas</h2>
           <button type="button" class="btn seeMoreButton mr-3">Ver mais</button>
         </div>
         <div
@@ -123,11 +123,11 @@
         </div>
       </div>
     </section>
-    <section id="media">
+    <section id="media" class="lightBackground py-5">
       <div class="container-sm">
         <div>
           <div class="d-flex align-items-center row">
-            <h2 class="mr-3">Mídia</h2>
+            <h2 class="mr-3 highlightFont">Mídia</h2>
           </div>
           <div class="container-sm">
             <div class="d-flex align-items-center row">
@@ -181,14 +181,30 @@
         </div>
       </div>
     </section>
-    <footer id="footer">
-      <div class="container-sm">
-        <div>
-          <img
-            alt="PlayCube logo"
-            src=""
-            style="content: var(--playcube-logo-escura)"
-          />
+    <footer id="footer" class="footer">
+      <div
+        class="container-sm d-flex justify-content-evenly flex-column flex-md-row"
+      >
+        <img
+          alt="PlayCube logo"
+          class="footer-logo"
+          src=""
+          style="content: var(--playcube-logo-escura)"
+        />
+        <div class="footer-links">
+          <a href="#">Sobre</a>
+          <a href="#">Contato</a>
+          <a href="#">Suporte</a>
+        </div>
+        <div class="footer-links">
+          <a href="#">Adicione um Filme</a>
+          <a href="#">Adicione uma Série</a>
+          <a href="#">Discussões</a>
+        </div>
+        <div class="footer-links">
+          <a href="#">Termos de Uso</a>
+          <a href="#">Política de Privacidade</a>
+          <a href="#">Diretrizes</a>
         </div>
       </div>
     </footer>
