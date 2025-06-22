@@ -23,6 +23,15 @@ body {
   height: 100px;
   width: 100%;
 }
+.nav-menu {
+  display: flex;
+  position: static;
+  background-color: transparent;
+  flex-direction: row;
+  padding: 0;
+  z-index: auto;
+}
+
 .lightBackground {
   background-color: var(--light-bege);
 }
@@ -118,6 +127,9 @@ body {
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
+}
+.hamburger {
+  display: none;
 }
 .horizontal-scroll {
   overflow-x: auto;

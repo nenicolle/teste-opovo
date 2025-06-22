@@ -1,0 +1,221 @@
+/*============================ Tablets ============================*/
+@media (max-width: 768px) {
+  body {
+    padding-top: 60px;
+    background-color: var(--light-bege);
+  }
+  h3 {
+    font-weight: var(--font-regular);
+  }
+  .recomendation {
+    color: var(--light-bege);
+  }
+  .movieRecomendationList {
+    display: flex;
+    gap: 20px !important;
+  }
+  .countText {
+    color: var(--dark-bege);
+    display: inline-flex;
+    vertical-align: middle;
+  }
+  .menuNav {
+    height: 60px;
+  }
+
+  .playcube-logo {
+    width: 100px;
+  }
+
+  .hamburger {
+    display: block;
+    background: none;
+    border: none;
+    color: var(--light-bege);
+    font-size: 1.5rem;
+    cursor: pointer;
+    padding: 0.5rem;
+  }
+
+  .nav-menu {
+    display: none;
+    position: absolute;
+    top: 60px;
+    left: 0;
+    right: 0;
+    background-color: var(--dark-blue);
+    flex-direction: column;
+    padding: 1rem;
+    z-index: 1000;
+  }
+  .movieInformationSection {
+    flex-direction: column;
+    justify-content: center;
+  }
+  .nav-menu.active {
+    display: flex;
+  }
+
+  .titleText {
+    margin: 0.5rem 0;
+    font-size: 1.1rem;
+  }
+  .lateral-esquerda,
+  .lateral-direita {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 40px;
+    height: 300px;
+    z-index: 99;
+    cursor: pointer;
+  }
+  .reviewContainer {
+    display: flex;
+    gap: 1rem;
+  }
+  .posterImage {
+    height: 600px;
+    margin-bottom: 20px;
+  }
+
+  .cardContainer {
+    width: 220px;
+    min-width: 220px;
+    height: 220px;
+    padding: 0.75rem;
+  }
+
+  .reviewText {
+    -webkit-line-clamp: 5;
+    font-size: 0.9rem;
+    line-height: 1.3;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .reviewFooter {
+    font-size: 0.9rem;
+  }
+  .video-thumb,
+  .poster,
+  .backdrop {
+    min-width: 220px;
+    height: 130px;
+  }
+
+  .movie-card {
+    width: 140px;
+    height: 280px;
+  }
+
+  .movie-card img {
+    height: 180px;
+  }
+  .footer {
+    background-color: var(--light-bege);
+  }
+  .footer-columns {
+    flex-direction: column;
+    align-items: start;
+    text-align: start;
+    gap: 0;
+    margin: 0 !important;
+  }
+  .footer-links {
+    margin: 0 !important;
+  }
+  .footerAlign {
+    flex-direction: column;
+  }
+  .footer-logo {
+    height: 30px;
+    width: 100px;
+  }
+  .footer-links {
+    margin: 10px 0;
+  }
+}
+
+/*============================ Mobile (≤ 376px)  ============================*/
+@media (max-width: 376px) {
+  body {
+    background-color: var(--light-bege);
+    padding-top: 50px;
+  }
+  .movieRecomendationList {
+    display: flex;
+    gap: 20px !important;
+  }
+  .menuNav {
+    height: 50px;
+  }
+
+  .playcube-logo {
+    width: 100px;
+  }
+
+  .hamburger {
+    font-size: 1.4rem;
+    padding: 0 5px;
+  }
+
+  .nav-menu {
+    top: 50px;
+    padding: 0.5rem;
+  }
+
+  .titleText {
+    font-size: 0.95rem;
+  }
+
+  .container-sm {
+    padding: 0 10px;
+  }
+
+  .posterImage {
+    height: 520px;
+    margin-bottom: 20px;
+  }
+
+  .cardContainer {
+    width: 300px;
+    min-width: 300px;
+    height: 300px;
+    background: var(--medium-bege);
+    border-radius: 10px;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    scroll-snap-align: start;
+  }
+
+  .video-thumb,
+  .poster,
+  .backdrop {
+    min-width: 150px;
+    height: 85px;
+  }
+
+  .movie-card {
+    width: 110px;
+    height: 240px;
+  }
+
+  .movie-card img {
+    height: 150px;
+    width: 110px;
+  }
+
+  .footer-logo {
+    height: 40px;
+  }
+
+  .footer {
+    background-color: var(--light-bege);
+    padding: 10px 0;
+  }
+  .columnFooter {
+    width: fit-content;
+  }
+}

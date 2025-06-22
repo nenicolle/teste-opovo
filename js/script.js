@@ -66,6 +66,9 @@ async function getMovieInformation(movie_id) {
   document.getElementById("orcamento").textContent = formatarDinheiro(
     data.budget
   );
+  const releaseDate = data.release_date || "N/A";
+  const year = releaseDate !== "N/A" ? releaseDate.split("-")[0] : "N/A";
+  document.getElementById("movieYear").textContent = year;
   document.getElementById("receita").textContent = formatarDinheiro(
     data.revenue
   );
@@ -91,20 +94,9 @@ async function getMovieCredits(movie_id) {
     ? ` ${roteirista.name}`
     : " Indisponível";
 
-  const elenco = data.cast;
+  const elenco = data.cast.splice(0, 10);
   const container = document.getElementById("carouselElenco");
   container.innerHTML = "";
-
-  container.addEventListener(
-    "wheel",
-    (e) => {
-      if (e.deltaY === 0) return;
-      e.preventDefault();
-      container.scrollLeft += e.deltaY;
-    },
-    { passive: false }
-  );
-
   elenco.forEach((ator) => {
     const card = document.createElement("div");
     card.className = "text-center";
@@ -138,6 +130,55 @@ async function getMovieCredits(movie_id) {
     container.appendChild(card);
   });
 }
+
+document.getElementById("carouselElenco").addEventListener("wheel", (event) => {
+  event.preventDefault();
+  const scrollAmount = event.deltaY * 5;
+  event.currentTarget.scrollLeft += scrollAmount;
+});
+
+document.addEventListener("DOMContentLoaded", () => {
+  const carrosseis = [
+    "carouselElenco",
+    "movie-list",
+    "backdropContainer",
+    "posterContainer",
+    "videoContainer",
+    "reviewsContainer",
+  ];
+  const hamburger = document.querySelector(".hamburger");
+  const navMenu = document.querySelector(".nav-menu");
+
+  if (hamburger && navMenu) {
+    hamburger.addEventListener("click", () => {
+      navMenu.classList.toggle("active");
+      hamburger.textContent = navMenu.classList.contains("active") ? "✕" : "☰";
+    });
+
+    navMenu.querySelectorAll("a").forEach((link) => {
+      link.addEventListener("click", () => {
+        navMenu.classList.remove("active");
+        hamburger.textContent = "☰";
+      });
+    });
+  }
+  carrosseis.forEach((id) => {
+    const elemento = document.getElementById(id);
+    if (elemento) {
+      elemento.addEventListener("wheel", (event) => {
+        event.preventDefault();
+        const scrollAmount = event.deltaY * 5;
+        event.currentTarget.scrollLeft += scrollAmount;
+      });
+    }
+  });
+
+  const carrosselElenco = document.getElementById("carouselElenco");
+  if (carrosselElenco) {
+    carrosselElenco.addEventListener("scroll", atualizarFadesElenco);
+  }
+  setTimeout(atualizarFadesElenco, 200);
+});
 
 function atualizarFadesElenco() {
   const carrossel = document.getElementById("carouselElenco");
@@ -209,7 +250,7 @@ async function getVideoAssets(movie_id) {
   const videoCount = document.getElementById("videoCount");
 
   if (!videoContainer || !videoCount) {
-    console.warn("Elementos de vídeo não encontrados no DOM.");
+    console.warn("Elementos de vídeo não encontrados.");
     return;
   }
 
@@ -244,7 +285,7 @@ async function getVideoAssets(movie_id) {
       <iframe 
         src="https://www.youtube.com/embed/${video.key}" 
         allowfullscreen
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allow="picture-in-picture"
         title="${video.name}"
         style="width: 100%; height: 100%; border: none; border-radius: 8px;"
       ></iframe>
