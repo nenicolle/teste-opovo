@@ -18,7 +18,6 @@ async function getMovieInformation(movie_id) {
     getConfig
   );
   const data = await res.json();
-  console.log(data, "getMovieInformation");
 
   const statusTraduzido = {
     Released: "Lançado",
@@ -206,7 +205,6 @@ async function getReviews(movie_id) {
     getConfig
   );
   const data = await res.json();
-  console.log(data, "getReviews");
 
   const container = document.getElementById("reviewsContainer");
   container.innerHTML = "";
@@ -316,7 +314,6 @@ async function getImagesAssets(movie_id) {
       );
     }
     const imageData = await imageResponse.json();
-    console.log(imageData, "imageData");
     displayImages(imageData);
     ativarScrollHorizontalComRoda();
   } catch (error) {
@@ -391,7 +388,6 @@ async function getTopRated(movie_id) {
       getConfig
     );
     const data = await res.json();
-    console.log(data, "data");
 
     const movieList = document.getElementById("movie-list");
 
