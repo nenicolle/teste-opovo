@@ -2,16 +2,6 @@
 
 Bem-vindo ao **PlayCube**, uma aplicação web simples que consome a API do The Movie Database (TMDb) para exibir informações sobre filmes, incluindo sinopse, elenco, críticas, vídeos, imagens e recomendações. Desenvolvido como parte do processo seletivo para o grupo **OPovo de Comunicações**.
 
-## Informações
-
-- Detalhes do Filme
-- Elenco
-- Críticas de usuários
-- Vídeos
-- Imagens
-- Recomendações de filmes
-- Design responsivo para desktop, mobile e tablets
-
 ## Tecnologias Utilizadas
 
 - HTML5
@@ -19,6 +9,9 @@ Bem-vindo ao **PlayCube**, uma aplicação web simples que consome a API do The 
 - JavaScript (ES6+)
 - The Movie Database (TMDb) API (utilizando fetch)
 - Bootstrap versão 4.6.2
+
+## Feature extra
+- Adicionei uma feature extra para troca de informação de filmes, ao clicar em um filme da seção de recomendações a página atualiza mostrando as informações do novo filme selecionado.
 
 ## Estrutura do Projeto
 
@@ -37,5 +30,5 @@ playcube/
 ├── index.html
 ├── README.md
 ```
-
 Desenvolvido com ❤️ por Nicolle Lima.
+espero que goste! :)
