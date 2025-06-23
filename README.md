@@ -1,6 +1,6 @@
 # PlayCube - Catálogo de Filmes e Séries
 
-Bem-vindo ao **PlayCube**, uma aplicação web simples que consome a API do The Movie Database (TMDb) para exibir informações sobre filmes, incluindo sinopse, elenco, críticas, vídeos, imagens e recomendações. Desenvolvido como parte do processo seletivo para o grupo **O Povo de Comunicações**.
+Bem-vindo ao **PlayCube**, uma aplicação web simples que consome a API do The Movie Database (TMDb) para exibir informações sobre filmes, incluindo sinopse, elenco, críticas, vídeos, imagens e recomendações. Desenvolvido como parte do processo seletivo para o grupo **OPovo de Comunicações**.
 
 ## Informações
 
